@@ -17,29 +17,48 @@ var {
 var List = [{id:0,name:"Pera"},{id:0,name:"Manzana"},{id:0,name:"Aguacate"},{id:0,name:"Fresa"},{id:0,name:"Papa"},]
 
 
+
 class AwesomeProject extends Component {
   constructor(props) {
     super(props)
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {dataSource:  ds.cloneWithRows(List)};
+    this.state = {dataSource:  ds.cloneWithRows(List), _currentAction:"list"};
+    this.edit = this.edit.bind(this)
+    this.list = this.list.bind(this)
+  }
+  edit(Data){
+      this.setState({_currentAction:"edit",  rowData: Data});
   }
 
-edit(){
-  console.log("WHAT");
-}
+  list(){
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.setState({_currentAction:"list", dataSource:  ds.cloneWithRows(List)});
+  }
 
-render() {
-    return (
-      <ListView
-        style={styles.welcome}
-        dataSource={this.state.dataSource}
-        renderRow={(rowData) =>
-          <TouchableHighlight onPress={this.edit}>
-            <Text style={styles.listItem}>{rowData.name}</Text>
-          </TouchableHighlight>}
+render()
+  {
+      if(this.state._currentAction == "list")
+      {
+          return (
+                <ListView
+                style={styles.welcome}
+                dataSource={this.state.dataSource}
+                renderRow={
+                (rowData) =>
+                <TouchableHighlight onPress={() => this.edit(rowData)}>
+                      <Text style={styles.listItem}>{rowData.name}</Text>
+                </TouchableHighlight>
+                          }/>
+                );
+     }else if(this.state._currentAction == "edit")
+     {
+         return (
+               <TouchableHighlight onPress={this.list}>
+                     <Text style={styles.listItem}>{this.state.rowData.name}</Text>
+               </TouchableHighlight>
+               );
+    }
 
-      />
-    );
   }
 }
 
