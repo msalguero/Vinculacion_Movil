@@ -3,27 +3,29 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
+var React = require('react-native');
+var {
   AppRegistry,
   Component,
   StyleSheet,
   Text,
+  ListView,
   View
-} from 'react-native';
+} = React;
 
 class AwesomeProject extends Component {
-  render() {
+  constructor(props) {
+    super(props)
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {dataSource:  ds.cloneWithRows(['row 1', 'row 2'])};
+  }
+
+render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          Fabian se la come toda
-        </Text>
-        <Text style={styles.instructions}>
-        </Text>
-      </View>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <Text>{rowData}</Text>}
+      />
     );
   }
 }
