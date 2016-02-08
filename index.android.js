@@ -10,21 +10,34 @@ var {
   StyleSheet,
   Text,
   ListView,
-  View
+  View,
+  TouchableHighlight
 } = React;
+
+var List = [{id:0,name:"Pera"},{id:0,name:"Manzana"},{id:0,name:"Aguacate"},{id:0,name:"Fresa"},{id:0,name:"Papa"},]
+
 
 class AwesomeProject extends Component {
   constructor(props) {
     super(props)
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {dataSource:  ds.cloneWithRows(['row 1', 'row 2'])};
+    this.state = {dataSource:  ds.cloneWithRows(List)};
   }
+
+edit(){
+  console.log("WHAT");
+}
 
 render() {
     return (
       <ListView
+        style={styles.welcome}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>{rowData}</Text>}
+        renderRow={(rowData) =>
+          <TouchableHighlight onPress={this.edit}>
+            <Text style={styles.listItem}>{rowData.name}</Text>
+          </TouchableHighlight>}
+
       />
     );
   }
@@ -38,14 +51,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    flex: 2
   },
-  instructions: {
+  listItem: {
     textAlign: 'center',
+    fontSize:20,
     color: '#333333',
+    borderColor: '#AAAAAA',
     marginBottom: 5,
+    backgroundColor: '#AAAAAA',
   },
 });
 
