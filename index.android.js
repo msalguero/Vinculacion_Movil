@@ -15,7 +15,12 @@ var {
   TextInput
 } = React;
 
-var List = [{id:1,name:"Pera"},{id:2,name:"Manzana"},{id:3,name:"Aguacate"},{id:4,name:"Fresa"},{id:5,name:"Papa"},]
+var List = [{id:1,name:"Pera"},
+            {id:2,name:"Manzanaz"},
+            {id:3,name:"Aguacate"},
+            {id:4,name:"Fresa"},
+            {id:5,name:"Papa"},
+          {id:6,name:"Litos"}]
 
 
 class AwesomeProject extends Component {
