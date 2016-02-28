@@ -12,51 +12,47 @@ var {
   ListView,
   View,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  Navigator
 } = React;
 
-var List = [{id:1,name:"Pera"},
-            {id:2,name:"Manzanaz"},
-            {id:3,name:"Aguacate"},
-            {id:4,name:"Fresa"},
-            {id:5,name:"Papa"},
-          {id:6,name:"Litos"}]
-
 var ApiService = require('./ApiService');
+var Login = require('./login.android');
+var Register = require('./register.android');
+var _navigator;
 
+var RouteMapper = function(route, navigationOperations, onComponentRef) {
+  _navigator = navigationOperations;
+
+  if (route.name === 'login') {
+    return (
+      <Login 
+      navigator={navigationOperations}/>
+    );
+  } else if (route.name === 'register') {
+    return (
+      <Register
+        navigator={navigationOperations}/>
+    );
+  }
+};
 
 class AwesomeProject extends Component {
   constructor(props) {
     super(props)
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {dataSource:  ds.cloneWithRows(List), _currentAction:"list"};
-    this.setDataSource = this.setDataSource.bind(this)
-    var api = new ApiService()
-    api.majors.get(this.setDataSource)
+
   }
 
-  setDataSource(Students){
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.setState({dataSource: ds.cloneWithRows(Students),  _currentAction: "list"});
-  }
-
-render()
-  {
-
+  render()
+    {
       return (
-            <View>
-                <ListView
-                style={styles.welcome}
-                dataSource={this.state.dataSource}
-                renderRow={
-                (rowData) =>
-                <View>
-                      <Text style={styles.listItem}>{rowData.Name}</Text>
-                </View>
-                          }/>
-            </View>
-            );
-     
+        <Navigator
+          style={styles.navigatorContainer}
+
+          initialRoute={{name:'login'}}
+          configureScene={() => Navigator.SceneConfigs.FadeAndroid}
+          renderScene={RouteMapper}/>
+      );  
   }
 }
 
