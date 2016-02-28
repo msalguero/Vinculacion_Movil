@@ -84,3 +84,5 @@ class Register extends Component{
 		);
 	}
 }
+
+module.exports = Register;
