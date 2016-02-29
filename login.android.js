@@ -27,8 +27,6 @@ class Login extends Component{
       Password: this.state.password
     }
   }
-
-
 	render()
 	{
 		return (
@@ -39,20 +37,19 @@ class Login extends Component{
         onChangeText={(email) => this.setState({email})} value={this.state.email}
           />
 
-      <Text>Password</Text>
-        <TextInput
-        onChangeText={(password) => this.setState({password})} value={this.state.password}
-           password={true}
-           />
+        <Text>Password</Text>
+          <TextInput
+          onChangeText={(password) => this.setState({password})} value={this.state.password}
+             password={true}
+             />
 
-      <TouchableHighlight style={styles.button} underlayColor={'#00008b'}
-      onPress={this._onLoginButton}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableHighlight>
+        <TouchableHighlight style={styles.button} underlayColor={'#00008b'}
+        onPress={this._onLoginButton}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableHighlight>
       </View>
-			);
-
+		);
 	}
 }
 const styles = StyleSheet.create({
