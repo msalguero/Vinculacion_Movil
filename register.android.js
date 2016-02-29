@@ -8,81 +8,87 @@ var {
   ListView,
   View,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  Picker
 } = React;
 
-const DropDown = require('react-native-dropdown');
-const {
-  Select,
-  Option,
-  OptionList,
-  updatePosition
-} = DropDown;
+var ApiService = require('./ApiService');
+var api = new ApiService();
 
 class Register extends Component{
-	contructor(props){
-		super(props)
+  constructor(props) {
+    super(props)
     this._onRegisterButton = this._onRegisterButton.bind(this)
-	}
-  _onRegisterButton(name, email, password ){
-
-  }
-  _getOptionList() {
-    return this.refs['OPTIONLIST'];
+    this.setMajors = this.setMajors.bind(this)
+    this.state = {major:  "", items: [], idNumber: "", firstName: "", lastName: "", email:"", password: ""};
+    api.majors.get(this.setMajors)
   }
 
+  setMajors(majors){
+    this.setState({major: "",  items: majors,  idNumber: "", firstName: "", lastName: "", email:"", password: ""});
+  }
 
-  _degree(degree_in) {
-
-    this.setState({
-      ...this.state,
-      my_degree: degree_in
+  _onRegisterButton(){
+    var student = {
+      Campus: "SPS",
+      Email: this.state.email,
+      IdNumber: this.state.idNumber,
+      Major: null,
+      Name: this.state.firstName + " " + this.state.lastName,
+      Password: this.state.password
+    }
+    console.log(student)
+    api.students.create(student, function(res){
+      console.log(res);
     });
   }
-	render()
-	{
-		return (
+  render()
+  {
+    var listItems = this.state.items.map(function(item) {
+      return (
+        <Picker.Item  key={item.MajorId} label={item.Name} value={item.Id} />
+      );
+    });
+
+    return (
       <View>
-        <Text>Register</Text>
-        <Text>First Name</Text>
-        <TextInput/>
-        <Text>Last Name</Text>
-        <TextInput/>
-        <Text>Email</Text>
-        <TextInput/>
-        <Text>Password</Text>
-        <TextInput password={true}/>
+        <Text>Registro</Text>
 
-       <Select
-             width={250}
-             ref="SELECT1"
-             optionListRef={this._getOptionList.bind(this)}
-             defaultValue="Selccione Carrera"
-             onSelect={this._degree.bind(this)}>
-             <Option>Ingenieria Sistemas</Option>
-             <Option>Ingenieria Mecatronica</Option>
-             <Option>Ingenieria Industrial</Option>
-             <Option>Ingenieria Civil</Option>
-             <Option>Ingenieria Gestion Logistica</Option>
-             <Option>Ingenieria Telecomunicaciones</Option>
-             <Option>Lic Diseno Grafico</Option>
-             <Option>Lic Relaciones Internacionales</Option>
-             <Option>Lic Finanzas</Option>
-             <Option>Lic Adm Empresas Turisticas</Option>
-             <Option>Lic Adm Industrial y de Negocios</Option>
-             <Option>Lic Derecho</Option>
-             <Option>Lic Mercadotecnia</Option>
-             <Option>Lic Psicologia</Option>
-             <Option>Arquitectura</Option>
+        <Text>Numero de Cuenta</Text>
+        <TextInput onChangeText={(idNumber) => this.setState({idNumber})} value={this.state.idNumber}
+            />
 
-           </Select>
+        <Text>Primer Nombre</Text>
+        <TextInput onChangeText={(firstName) => this.setState({firstName})} value={this.state.firstName}
+            />
 
-      <TouchableHighlight>
-        <Text>Register</Text>
+         <Text>Apellido</Text>
+         <TextInput onChangeText={(lastName) => this.setState({lastName})} value={this.state.lastName}
+            />
+
+          <Text>Email</Text>
+          <TextInput onChangeText={(email) => this.setState({email})} value={this.state.email}
+             />
+
+        <Text>Contraseña</Text>
+          <TextInput onChangeText={(password) => this.setState({password})} value={this.state.password}
+             password={true}
+             />
+
+        <Text>Carrera</Text>
+        <Picker
+          selectedValue={this.state.major}
+          onValueChange={(selectedMajor) => this.setState({major: selectedMajor})}>
+          {listItems}
+        </Picker>
+
+      <TouchableHighlight onPress={this._onRegisterButton}>
+        <Text>Registrar</Text>
       </TouchableHighlight>
       </View>
-		);
-	}
+      );
+
+  }
 }
 
 module.exports = Register;
