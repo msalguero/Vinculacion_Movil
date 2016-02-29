@@ -16,19 +16,18 @@ var ApiService = require('./ApiService');
 var api = new ApiService();
 
 class Login extends Component{
-  /*
-	contructor(props){
-		super(props)
+  constructor(props) {
+    super(props)
     this._onLoginButton = this._onLoginButton.bind(this)
     this.state = {email: "", password: ""};
-	}
+  }
   _onLoginButton(){
     var login = {
-      Email = this.state.email
-      Password = this.state.password
+      Email: this.state.email,
+      Password: this.state.password
     }
   }
-  */
+
 
 	render()
 	{
@@ -37,17 +36,17 @@ class Login extends Component{
         <Text style={styles.titleText}>Login</Text>
         <Text>Email</Text>
         <TextInput
-        //onChangeText={(email) => this.setState({email})} value={this.state.email}
+        onChangeText={(email) => this.setState({email})} value={this.state.email}
           />
 
       <Text>Password</Text>
         <TextInput
-        //onChangeText={(password) => this.setState({password})} value={this.state.password}
+        onChangeText={(password) => this.setState({password})} value={this.state.password}
            password={true}
            />
 
       <TouchableHighlight style={styles.button} underlayColor={'#00008b'}
-      //onPress={this._onLoginButton}
+      onPress={this._onLoginButton}
       >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableHighlight>
