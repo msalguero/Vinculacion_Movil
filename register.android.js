@@ -52,7 +52,7 @@ class Register extends Component{
 
     return (
       <View>
-        <Text>Registro</Text>
+        <Text style={styles.titleText}>Registro</Text>
 
         <Text>Numero de Cuenta</Text>
         <TextInput onChangeText={(idNumber) => this.setState({idNumber})} value={this.state.idNumber}
@@ -76,19 +76,42 @@ class Register extends Component{
              />
 
         <Text>Carrera</Text>
-        <Picker
+        <Picker style = {styles.picker}
           selectedValue={this.state.major}
           onValueChange={(selectedMajor) => this.setState({major: selectedMajor})}>
           {listItems}
         </Picker>
-
-      <TouchableHighlight onPress={this._onRegisterButton}>
-        <Text>Registrar</Text>
+      <Text></Text>
+      <TouchableHighlight style={styles.button} underlayColor={'#00008b'} onPress={this._onRegisterButton}>
+        <Text style={styles.buttonText}>Registrar</Text>
       </TouchableHighlight>
       </View>
       );
 
   }
 }
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#0000ff'
+
+  },
+  button: {
+    width: 120,
+    height: 50,
+    backgroundColor: 'aqua',
+    marginLeft: 100
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  picker: {
+    width: 300
+  }
+});
 
 module.exports = Register;
