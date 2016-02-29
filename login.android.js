@@ -34,17 +34,17 @@ class Login extends Component{
         <Text style={styles.titleText}>Login</Text>
         <Text>Email</Text>
         <TextInput
-        onChangeText={(email) => this.setState({email})} value={this.state.email}
-          />
+          onChangeText={(email) => this.setState({email})} value={this.state.email}
+        />
 
         <Text>Password</Text>
           <TextInput
-          onChangeText={(password) => this.setState({password})} value={this.state.password}
-             password={true}
-             />
+            onChangeText={(password) => this.setState({password})} value={this.state.password}
+            password={true}
+          />
 
         <TouchableHighlight style={styles.button} underlayColor={'#00008b'}
-        onPress={this._onLoginButton}
+          onPress={this._onLoginButton}
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableHighlight>
