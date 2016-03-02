@@ -6,6 +6,7 @@ var {
   StyleSheet,
   Text,
   Image,
+  Navigator,
   ListView,
   View,
   TouchableHighlight,
@@ -16,6 +17,7 @@ var ApiService = require('./ApiService');
 var api = new ApiService();
 
 class Login extends Component{
+
   constructor(props) {
     super(props)
     this._onLoginButton = this._onLoginButton.bind(this)
@@ -23,7 +25,10 @@ class Login extends Component{
     this.state = {email: "", password: ""};
   }
   _onRegisterButton(){
-
+    //console.log(this.props)
+    this.props.navigator.push({
+      name: 'register'
+    })
   }
   _onLoginButton(){
     //regex
