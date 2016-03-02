@@ -13,8 +13,7 @@ import React, {
 
 var ApiService = require('./ApiService');
 var api = new ApiService();
-
-var List = [];
+var ds = new ListView.DataSource({rowHasChanged:(row1, row2) => row1 !== row2});
 
 var Labels = {
   viewTitle:"Aprobacion de Alumnos"
@@ -25,22 +24,18 @@ class StudentsApproveSelect extends Component {
   constructor(props){
     super(props);
 
+    var self = this;
+    this.state={dataSource:ds.cloneWithRows([])};
     this.toValidate = this.toValidate.bind(this);
     this.setDataSource = this.setDataSource.bind(this);
-    
-    api.students.getByFilter(0,function(res){
-      List = res;
-    });
-    this.setDataSource();
+    api.students.getByFilter(0,self.setDataSource);
   };
 
-  setDataSource(){
-    console.log(List);
-    var ds = new ListView.DataSource({rowHasChanged:(row1, row2) => row1 !== row2});
-    this.state={
-      dataSource: ds.cloneWithRows(List),
-      loaded:false
-    }
+  setDataSource(list){
+  	console.log(list);
+    this.setState({
+      dataSource: ds.cloneWithRows(list)
+    });
   };
 
 
@@ -53,8 +48,9 @@ class StudentsApproveSelect extends Component {
   };
 
   renderRow(rowData){
+  	console.log(rowData);
     return(
-      <TouchableHighlight underlayColor='#FEFEFE' onPress={this.toValidate(rowData)}>
+      <TouchableHighlight underlayColor='#FEFEFE' onPress={(rowData) => this.toValidate(rowData)}>
         <View style={styles.renderRowGeneral}>
           <View style={styles.viewIconHolder}>
 
@@ -73,7 +69,7 @@ class StudentsApproveSelect extends Component {
                 {"Numero de Cuemta:"}
               </Text>
               <Text style={styles.viewItemText}>
-                {rowData.IdNumber}
+                {rowData.AccountId}
               </Text>
             </View>
             <View style={styles.viewItemSubcontainer}>
@@ -88,9 +84,15 @@ class StudentsApproveSelect extends Component {
               <Text style={styles.viewItemLabel}>
                 {"Carrera:"}
               </Text>
-              <Text style={styles.viewItemText}>
-                {rowData.Major.Name}
-              </Text>
+             
+
+              <View>{(function(rowData) {
+		          if (rowData.Major) {
+		            return (<Text style={styles.viewItemText}>{rowData.Major.Name}</Text>); 
+		          } 
+		        })(rowData)}
+              </View>
+              
             </View>
           </View>
         </View>
@@ -112,7 +114,7 @@ class StudentsApproveSelect extends Component {
 
   renderFooter(){
     return(
-    <TouchableHighlight style={styles.viewFooterContainer} onPress={this.setDataSource()}>
+    <TouchableHighlight style={styles.viewFooterContainer}>
       <Text style={styles.viewFooter}>
             {"Footer"}
       </Text>
