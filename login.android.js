@@ -1,4 +1,5 @@
 'use strict';
+
 var React = require('react-native');
 var {
   AppRegistry,
@@ -30,9 +31,10 @@ class Login extends Component{
       name: 'register'
     })
   }
+
   _onLoginButton(){
     //regex
-    if(this.state.email!="" || this.state.password!= ""){
+    if(validateEmail(this.state.email) || this.state.password!= ""){
       var user = {
         User: this.state.email,
         Password: this.state.password
@@ -78,6 +80,10 @@ class Login extends Component{
       </View>
 		);
 	}
+}
+function validateEmail(email) {
+    var re = /^[a-zA-Z0-9._-]+@unitec\.edu/;
+    return re.test(email);
 }
 const styles = StyleSheet.create({
   titleText: {
