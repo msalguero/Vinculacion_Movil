@@ -25,6 +25,7 @@ class Register extends Component{
   }
 
   setMajors(majors){
+    console.log(majors)
     this.setState({major: "",  items: majors,  idNumber: "", firstName: "", lastName: "", email:"", password: ""});
   }
 
