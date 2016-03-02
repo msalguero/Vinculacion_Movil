@@ -52,7 +52,7 @@ class Register extends Component{
     });
 
     return (
-      <View>
+      <View style={styles.app}>
         <Text style={styles.titleText}>Registro</Text>
 
         <Text>Numero de Cuenta</Text>
@@ -92,6 +92,9 @@ class Register extends Component{
   }
 }
 const styles = StyleSheet.create({
+  app:{
+    flex:1,
+  },
   titleText: {
     fontSize: 30,
     fontWeight: 'bold',

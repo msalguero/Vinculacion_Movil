@@ -34,18 +34,20 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
   } else if (route.name === 'register') {
     return (
       <Register
-        navigator={navigationOperations}/>
+      navigator={navigationOperations}/>
     );
   }
   else if (route.name === 'selectApprove') {
     return (
       <StudentApproveSelect
-        navigator={navigationOperations}/>
+      navigator={navigationOperations}/>
     );
   }
   else if(route.name === 'formApprove'){
     return(
-        <StudentApproveForm navigator={navigationOperations}/>
+        <StudentApproveForm 
+        navigator={navigationOperations}
+        student={route.student}/>
       );
   }
 };

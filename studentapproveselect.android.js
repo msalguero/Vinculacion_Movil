@@ -32,7 +32,6 @@ class StudentsApproveSelect extends Component {
   };
 
   setDataSource(list){
-  	console.log(list);
     this.setState({
       dataSource: ds.cloneWithRows(list)
     });
@@ -40,17 +39,19 @@ class StudentsApproveSelect extends Component {
 
 
   toValidate(rowData){
-      this.setState({studentToApprove:rowData});
+      console.log(rowData);
       this.props.navigator.push({
-         name: 'formApprove'
+         name: 'formApprove',
+         student: rowData
       });
   
   };
 
+  
+
   renderRow(rowData){
-  	console.log(rowData);
     return(
-      <TouchableHighlight underlayColor='#FEFEFE' onPress={(rowData) => this.toValidate(rowData)}>
+      <TouchableHighlight underlayColor='#FEFEFE' onPress={() => this.toValidate(rowData)}>
         <View style={styles.renderRowGeneral}>
           <View style={styles.viewIconHolder}>
 
@@ -138,7 +139,7 @@ class StudentsApproveSelect extends Component {
 
 const styles = StyleSheet.create({
   app:{
-    flex:1,
+    flex:1
   },
   renderRowGeneral:{
     flexDirection:'row',
@@ -146,9 +147,9 @@ const styles = StyleSheet.create({
     overflow:'visible'
   },
   viewTitleContainer: {
-    margin: 10,
+    margin: 1,
     flex:.1,
-    backgroundColor:'#F50000',
+    backgroundColor:'#F5D3D3',
     alignSelf:'stretch'
   },
   viewTitle:{
@@ -157,20 +158,23 @@ const styles = StyleSheet.create({
     fontWeight:'bold'
   },
   viewFooterContainer: {
-    margin: 10,
+    margin: 1,
     flex:.1,
-    backgroundColor:'#F50000',
+    backgroundColor:'#F5D3D3',
     height:40,
     alignSelf:'stretch'
   },
   viewFooter:{
     textAlign:'center',
     fontSize:20,
-    fontWeight:'bold'
+    fontWeight:'bold',
   },
   viewIconHolder:{
-    backgroundColor: 'green',
+    backgroundColor:'green',
     flexDirection:'row',
+    borderWidth:2,
+    borderTopRightRadius:20,
+    borderBottomRightRadius:20,
     marginTop:12,
     marginBottom:12,
     height:64,
