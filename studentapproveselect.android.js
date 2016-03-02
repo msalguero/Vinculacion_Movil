@@ -10,152 +10,32 @@ import React, {
   ScrollView,
 } from 'react-native';
 
+
+var ApiService = require('./ApiService');
+var api = new ApiService();
+
+var List = [];
+
 var Labels = {
   viewTitle:"Aprobacion de Alumnos"
 }
 
-var List = [
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'alefrech@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Alejandro Frech',
-    Password:'123456789',
-    Status:'Pending'
-  },
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },  
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },  
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },  
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },  
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  },
-  {
-    Campus:'SPS',
-    CreationDate:'2016-02-28T12:24:36',
-    Email:'sambagong@unitec.edu',
-    Id:9,IdNumber:'21151029',
-    Major:{
-      Id:30,
-      MajorId:'I - 01',
-      Name:'INGENIERÍA EN SISTEMAS COMPUTACIONALES'
-    },
-    ModificationDate:'2016-02-28T12:36:00',
-    Name:'Fabian',
-    Password:'123456789',
-    Status:'Pending'
-  }
-];
-
-
 class StudentsApproveSelect extends Component {
+
   constructor(props){
     super(props);
+
+    this.toValidate = this.toValidate.bind(this);
+    this.setDataSource = this.setDataSource.bind(this);
+    
+    api.students.getByFilter(0,function(res){
+      List = res;
+    });
+    this.setDataSource();
+  };
+
+  setDataSource(){
+    console.log(List);
     var ds = new ListView.DataSource({rowHasChanged:(row1, row2) => row1 !== row2});
     this.state={
       dataSource: ds.cloneWithRows(List),
@@ -163,8 +43,13 @@ class StudentsApproveSelect extends Component {
     }
   };
 
+
   toValidate(rowData){
       this.setState({studentToApprove:rowData});
+      this.props.navigator.push({
+         name: 'formApprove'
+      });
+  
   };
 
   renderRow(rowData){
@@ -227,11 +112,11 @@ class StudentsApproveSelect extends Component {
 
   renderFooter(){
     return(
-    <View style={styles.viewFooterContainer}>
+    <TouchableHighlight style={styles.viewFooterContainer} onPress={this.setDataSource()}>
       <Text style={styles.viewFooter}>
             {"Footer"}
       </Text>
-    </View>
+    </TouchableHighlight>
     )
   };
 

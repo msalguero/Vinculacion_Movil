@@ -19,6 +19,8 @@ var {
 var ApiService = require('./ApiService');
 var Login = require('./login.android');
 var Register = require('./register.android');
+var StudentApproveSelect = require('./studentapproveselect.android.js');
+var StudentApproveForm = require('./studentapproveform.android.js');
 var _navigator;
 
 var RouteMapper = function(route, navigationOperations, onComponentRef) {
@@ -35,6 +37,17 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
         navigator={navigationOperations}/>
     );
   }
+  else if (route.name === 'selectApprove') {
+    return (
+      <StudentApproveSelect
+        navigator={navigationOperations}/>
+    );
+  }
+  else if(route.name === 'formApprove'){
+    return(
+        <StudentApproveForm navigator={navigationOperations}/>
+      );
+  }
 };
 
 class AwesomeProject extends Component {
@@ -49,7 +62,7 @@ class AwesomeProject extends Component {
         <Navigator
           style={styles.navigatorContainer}
 
-          initialRoute={{name:'login'}}
+          initialRoute={{name:'selectApprove'}}
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={RouteMapper}/>
       );  

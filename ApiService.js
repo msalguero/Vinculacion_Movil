@@ -30,6 +30,13 @@ var ApiService = function () {
 	      .done();
   	},
 
+  	getByFilter: function(id, callback){
+  		fetch(url + 'students/filter/' + id)
+	      .then((response) => response.json())
+	      .then(callback)
+	      .done();
+  	},
+
   	getById: function(id, callback){
   		fetch(url + 'students/' + id)
 	      .then((response) => response.json())

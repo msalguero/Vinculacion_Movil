@@ -14,7 +14,7 @@ var {
 } = React;
 
 
-class StudentApprove extends Component {
+class StudentApproveForm extends Component {
   constructor(props) {
     super(props)
   }
@@ -35,4 +35,4 @@ const styles = StyleSheet.create(
   }
 );
 
-module.exports = StudentApprove;
+module.exports = StudentApproveForm;
