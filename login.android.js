@@ -19,13 +19,27 @@ class Login extends Component{
   constructor(props) {
     super(props)
     this._onLoginButton = this._onLoginButton.bind(this)
+    this._onRegisterButton = this._onRegisterButton.bind(this)
     this.state = {email: "", password: ""};
   }
+  _onRegisterButton(){
+
+  }
   _onLoginButton(){
-    var login = {
-      Email: this.state.email,
-      Password: this.state.password
+    //regex
+    if(this.state.email!="" || this.state.password!= ""){
+      var user = {
+        User: this.state.email,
+        Password: this.state.password
+      }
+      api.login.login(user, function(res){
+        console.log(res);
+      });
     }
+    else{
+      //message error
+    }
+
   }
 	render()
 	{
@@ -48,6 +62,14 @@ class Login extends Component{
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableHighlight>
+
+        <Text></Text>
+        <Text></Text>
+        <TouchableHighlight style = {styles.buttonReg} underlayColor={'#00008b'}
+          onPress={this._onRegisterButton}
+        >
+          <Text style={styles.buttonText}>Registrarse</Text>
+        </TouchableHighlight>
       </View>
 		);
 	}
@@ -64,6 +86,10 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'aqua',
     marginLeft: 100
+  },
+  buttonReg: {
+    width: 100,
+    color: 'aqua',
   },
   buttonText: {
     fontSize: 20,

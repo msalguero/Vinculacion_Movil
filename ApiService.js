@@ -3,7 +3,23 @@
 
 var ApiService = function () {
 
-  var url = 'http://vinculacionbackend.apphb.com/api/';
+  var url = 'http://fiasps.unitec.edu:8085/api/';
+
+  this.login = {
+    login: function(object,callback){
+      fetch(url + 'login', {
+		  method: 'POST',
+		  headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify(object)
+		})
+		.then((response) => response.json())
+	    .then(callback)
+	    .done();
+    }
+  }
 
   this.students = {
 
@@ -53,6 +69,7 @@ var ApiService = function () {
   this.majors = {
 
   	get: function(callback){
+      console.log(url+'majors')
   		fetch(url + 'majors')
 	      .then((response) => response.json())
 	      .then(callback)
