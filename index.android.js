@@ -21,7 +21,7 @@ var Login = require('./login.android');
 var Register = require('./register.android');
 var StudentApproveSelect = require('./studentapproveselect.android.js');
 var StudentApproveForm = require('./studentapproveform.android.js');
-var RegisterHours = requre('./registerhours.android.js');
+var RegisterHours = require('./registerhours.android.js');
 var _navigator;
 
 var RouteMapper = function(route, navigationOperations, onComponentRef) {
@@ -29,7 +29,7 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
 
   if (route.name === 'login') {
     return (
-      <Login 
+      <Login
       navigator={navigationOperations}/>
     );
   } else if (route.name === 'register') {
@@ -46,14 +46,14 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
   }
   else if(route.name === 'formApprove'){
     return(
-        <StudentApproveForm 
+        <StudentApproveForm
         navigator={navigationOperations}
         student={route.student}/>
       );
-  } 
+  }
   else if(route.name === 'registerHours'){
     return(
-        <RegisterHours 
+        <RegisterHours
         navigator={navigationOperations}/>
       );
   }
@@ -71,10 +71,10 @@ class AwesomeProject extends Component {
         <Navigator
           style={styles.navigatorContainer}
 
-          initialRoute={{name:'registerHours'}}
+          initialRoute={{name:'login'}}
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={RouteMapper}/>
-      );  
+      );
   }
 }
 

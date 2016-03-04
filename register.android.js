@@ -13,12 +13,14 @@ var {
 } = React;
 
 var ApiService = require('./ApiService');
+var Validations = require('./Validations');
 var api = new ApiService();
 
 class Register extends Component{
   constructor(props) {
     super(props)
     this._onRegisterButton = this._onRegisterButton.bind(this)
+    this._onLoginButton = this._onLoginButton.bind(this)
     this.setMajors = this.setMajors.bind(this)
     this.state = {major:  "", items: [], idNumber: "", firstName: "", lastName: "", email:"", password: ""};
     api.majors.get(this.setMajors)
@@ -30,18 +32,45 @@ class Register extends Component{
   }
 
   _onRegisterButton(){
-    var student = {
-      Campus: "SPS",
-      Email: this.state.email,
-      IdNumber: this.state.idNumber,
-      Major: null,
-      Name: this.state.firstName + " " + this.state.lastName,
-      Password: this.state.password
+    var register = true
+    if(!Validations.check_email(this.state.email)){
+      console.log("Correo invalido, ejemplo@unite.edu \n")
+      register = false
     }
-    console.log(student)
-    api.students.create(student, function(res){
-      console.log(res);
-    });
+    if(!Validations.check_string(this.state.firstName)){
+      console.log("Nombre invalido, solo letras")
+      register = false
+    }
+    if(!Validations.check_string(this.state.lastName)){
+      console.log("Apellido invalido, solo letras")
+      register = false
+    }
+    if(!Validations.check_account(this.state.idNumber)){
+      console.log("Cuenta invalida, solo numeros")
+      register = false
+    }
+    if(!Validations.check_password(this.state.password)){
+      console.log("debe contener almenos un (digito,minuscula,mayuscula), minimo 8 caracteres")
+      register = false
+    }
+    if(register){
+      var student = {
+        Campus: "SPS",
+        Email: this.state.email,
+        IdNumber: this.state.idNumber,
+        Major: this.state.major,
+        Name: this.state.firstName + " " + this.state.lastName,
+        Password: this.state.password
+      }
+      api.students.create(student, function(res){
+        console.log(res);
+      });
+    }
+  }
+  _onLoginButton(){
+    this.props.navigator.push({
+      name: 'login'
+    })
   }
   render()
   {
@@ -83,9 +112,17 @@ class Register extends Component{
           {listItems}
         </Picker>
       <Text></Text>
+
+      <TouchableHighlight style = {styles.buttonReg} underlayColor={'#00008b'}
+        onPress={this._onLoginButton}
+      >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableHighlight>
+
       <TouchableHighlight style={styles.button} underlayColor={'#00008b'} onPress={this._onRegisterButton}>
         <Text style={styles.buttonText}>Registrar</Text>
       </TouchableHighlight>
+
       </View>
       );
 
@@ -107,6 +144,10 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'aqua',
     marginLeft: 100
+  },
+  buttonReg: {
+    width: 100,
+    color: 'aqua',
   },
   buttonText: {
     fontSize: 20,
