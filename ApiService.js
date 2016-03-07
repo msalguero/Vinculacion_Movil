@@ -131,7 +131,12 @@ var ApiService = function () {
   this.majors = 
   {
   	get: function(callback){
-		fetch(url + 'majors')
+		fetch(url + 'majors', {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+		})
 		.then((response) => response.json())
 		.then(callback)
 		.done();
@@ -202,6 +207,21 @@ var ApiService = function () {
    {
   	get: function(callback){
   		fetch(url + 'projects', {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
+		.then((response) => response.json())
+		.then(callback)
+		.done();
+  	}
+  }
+
+   this.sections = 
+   {
+  	get: function(callback){
+  		fetch(url + 'sections', {
   			method: 'GET',
 			headers: {
 				'Authorization': auth.token

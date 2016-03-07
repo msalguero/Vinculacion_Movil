@@ -8,6 +8,7 @@ import React, {
   ListView,
   TouchableHighlight,
   ScrollView,
+  Picker
 } from 'react-native';
 
 var ApiService = require('./ApiService');
@@ -24,56 +25,94 @@ class RegisterHours extends Component
 
       this.state={
         selectedMajor:"",
-        selectedSections:"",
-        selectedProjects:"",
-        selectedStudents:"",
+        selectedSection:"",
+        selectedProject:"",
+        selectedStudent:"",
+        hoursToRegister:"0",
         Majors:[],
         Sections:[],
         Projects:[],
         Students:[]
       }
-      api.
+      api.majors.get(this.setMajors);
+      api.sections.get(this.setSections);
+      api.projects.get(this.setProjects);
+      api.students.get(this.setStudents);
     };
 
     listMajors(item){
-      this.state.Majors.map(function(item){return (<Picker.Item key={item.MajorId} label={item.Name} value={item.Id} />)})
+      this.state.Majors.map(function(item){return (<Picker.Item style={styles.viewItemText} key={item.MajorId} label={item.Name} value={item.Id} />)})
     };
 
     setMajors(majors){
-      this.setState({Majors: majors});
-    }
+      this.setState({Majors:majors});
+    };
 
     listSections(item)
     {
-      this.state.Sections.map(function(item){return (<Picker.Item key={item.Code} label={item.Code} value={item.Id} />)})
+      this.state.Sections.map(function(item){return (<Picker.Item style={styles.viewItemText} key={item.Code} label={item.Code} value={item.Id} />)})
     };
 
     setSections(sections){
       this.setState({Sections: sections});
-    }
+    };
 
-    listProject(item){
-      this.state.Projects.map(function(item){return (<Picker.Item key={item.Id} label={item.Name} value={item.Id} />)})
+    listProjects(item){
+      this.state.Projects.map(function(item){return (<Picker.Item style={styles.viewItemText} key={item.Id} label={item.Name} value={item.Id} />)})
     };
 
     setProjects(projects){
       this.setState({Projects: projects});
-    }
+    };
 
     listStudents(item){
-      this.state.Students.map(function(item){return(<Picker.Item key={item.AccountId} label={item.Name} value={item.Id}/>)})
+      this.state.Students.map(function(item){return(<Picker.Item style={styles.viewItemText} key={item.AccountId} label={item.Name} value={item.Id}/>)})
     };
 
     setStudents(students){
       this.setState({Students: students});
-    }
+    };
 
 
     renderForm(){
 
       return(
-        <View>
-
+        <View style={styles.app}>
+          <View style={styles.renderRowGeneral}>
+              <Text style={styles.viewItemLabel}>{"Major"}</Text>
+               <Picker style={styles.picker}
+                selectedValue={this.state.selectedMajor}
+                onValueChange={(selectedMajor) => this.setState({selectedMajor: selectedMajor})}>
+                 {this.listMajors()}
+                </Picker>
+          </View>
+          <View style={styles.renderRowGeneral}>
+              <Text style={styles.viewItemLabel}>{"Sections"}</Text>
+               <Picker style={styles.picker}
+                selectedValue={this.state.selectedSection}
+                onValueChange={(selectedSection) => this.setState({selectedSection: selectedSection})}>
+                 {this.listSections()}
+                </Picker>
+          </View>
+          <View style={styles.renderRowGeneral}>
+              <Text style={styles.viewItemLabel}>{"Projects"}</Text>
+               <Picker style={styles.picker}
+                selectedValue={this.state.selectedProject}
+                onValueChange={(selectedProject) => this.setState({selectedProject: selectedProject})}>
+                 {this.listProjects()}
+                </Picker>
+          </View>
+          <View style={styles.renderRowGeneral}>
+              <Text style={styles.viewItemLabel}>{"Students"}</Text>
+               <Picker style={styles.picker}
+                selectedValue={this.state.selectedStudent}
+                onValueChange={(selectedStudent) => this.setState({selectedStudent: selectedStudent})}>
+                 {this.listStudents()}
+                </Picker>
+          </View>
+          <View style={styles.renderRowGeneral}>
+            <TextInput onChangeText={(hoursToRegister) => this.setState({hoursToRegister:hoursToRegister})} value={this.state.hoursToRegister}/>
+          </View>
         </View>
         );
     };
@@ -152,6 +191,9 @@ const styles = StyleSheet.create({
   },
   touchHighlight:{
     tintColor:'#FEFEFE',
+  },
+  picker: {
+    width: 300
   }
 });
 

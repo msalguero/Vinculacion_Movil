@@ -59,32 +59,40 @@ class Login extends Component{
 	render()
 	{
 		return (
-      <View>
-        <Text style={styles.titleText}>Login</Text>
-        <Text>Email</Text>
-        <TextInput
-          onChangeText={(email) => this.setState({email})} value={this.state.email}
-        />
-
-        <Text>Password</Text>
-          <TextInput
-            onChangeText={(password) => this.setState({password})} value={this.state.password}
-            password={true}
-          />
-
-        <TouchableHighlight style={styles.button} underlayColor={'#00008b'}
-          onPress={this._onLoginButton}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableHighlight>
-
-        <Text></Text>
-        <Text></Text>
-        <TouchableHighlight style = {styles.buttonReg} underlayColor={'#00008b'}
-          onPress={this._onRegisterButton}
-        >
-          <Text style={styles.buttonText}>Registrarse</Text>
-        </TouchableHighlight>
+      <View style={styles.app}>
+        <View style={styles.container}>
+          <Text style={styles.titleText}>Login</Text>
+          <View style={styles.renderRowGeneral}>
+            <Text style={styles.textLabel}>Email</Text>
+            <TextInput
+            style={styles.textInput}
+            onChangeText={(email) => this.setState({email})} 
+            value={this.state.email}
+            />
+          </View>
+          <View style={styles.renderRowGeneral}>
+            <Text style={styles.textLabel}>Password</Text>
+            <TextInput
+            style={styles.textInput}
+            onChangeText={(password) => this.setState({password})} 
+            value={this.state.password}
+            password={true}/>
+          </View>
+        </View>
+        <View style={styles.renderRowGeneral}>
+          <TouchableHighlight 
+          style={styles.button} 
+          underlayColor={'#00008b'}
+          onPress={this._onLoginButton}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableHighlight>
+          <TouchableHighlight 
+          style = {styles.buttonReg} 
+          underlayColor={'#00008b'} 
+          onPress={this._onRegisterButton}>
+            <Text style={styles.buttonText}>Registrarse</Text>
+          </TouchableHighlight>
+        </View>
       </View>
 		);
 	}
@@ -94,25 +102,57 @@ function validateEmail(email) {
     return re.test(email);
 }
 const styles = StyleSheet.create({
+  app:{
+    flex:1
+  },
+  container:{
+    flex:.4
+  },
   titleText: {
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#0000ff'
   },
+  renderRowGeneral:{
+    flexDirection:'row',
+    flex:1,
+    margin:.1
+  },
   button: {
-    width: 120,
+    flex:.2,
+    margin:.1,
     height: 50,
-    backgroundColor: 'aqua',
-    marginLeft: 100
+    backgroundColor: 'blue',
+    justifyContent:'center',
+    borderRadius:20
   },
   buttonReg: {
-    width: 100
+    flex:.3,
+    margin:.1,
+    height:50,
+    backgroundColor:'red',
+    justifyContent:'center',
+    borderRadius:20
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
+    color:'white',
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  textLabel:{
+    flex:.3,
+    height:40,
+    margin:.05,
+    fontSize:20,
+    textAlign:'left',
+    justifyContent:'center'
+  },
+  textInput:{
+    margin:.05,
+    height:40,
+    flex:.7
   }
 });
 
