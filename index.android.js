@@ -18,12 +18,8 @@ var {
 
 var ApiService = require('./ApiService');
 var Login = require('./login.android');
-<<<<<<< HEAD
-var Register = require('./register.android');
 var Home = require('./home');
-=======
 var RegisterStudent = require('./registerstudent.android');
->>>>>>> 593c3cc18e8e6225050079bbc65aff1359d23904
 var StudentApproveSelect = require('./studentapproveselect.android.js');
 var StudentApproveForm = require('./studentapproveform.android.js');
 var RegisterHours = require('./registerhours.android.js');
@@ -81,57 +77,13 @@ class AwesomeProject extends Component {
       return (
         <Navigator
           style={styles.navigatorContainer}
-
-          initialRoute={{name:'login'}}
+          initialRoute={{name:'registerHours'}}
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={RouteMapper}/>
       );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    flex: 2
-  },
-  listItem: {
-    textAlign: 'center',
-    fontSize:20,
-    color: '#333333',
-    borderColor: '#AAAAAA',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 20,
-    marginRight:20,
-    backgroundColor: '#AAAAAA',
-  },
-  listItemAdd: {
-    textAlign: 'center',
-    fontSize:20,
-    color: '#333333',
-    borderColor: '#AAAAAA',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 20,
-    marginRight:20,
-    backgroundColor: '#AAEEAA',
-  },
-  listItemDelete: {
-    textAlign: 'center',
-    fontSize:20,
-    color: '#333333',
-    borderColor: '#AAAAAA',
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 20,
-    marginRight:20,
-    backgroundColor: '#EEAAAA',
-  }
-});
+const styles = StyleSheet.create({});
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
