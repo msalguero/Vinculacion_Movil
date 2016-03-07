@@ -18,10 +18,10 @@ var {
 
 var ApiService = require('./ApiService');
 var Login = require('./login.android');
-var Register = require('./register.android');
+var RegisterStudent = require('./registerstudent.android');
 var StudentApproveSelect = require('./studentapproveselect.android.js');
 var StudentApproveForm = require('./studentapproveform.android.js');
-var RegisterHours = requre('./registerhours.android.js');
+var RegisterHours = require('./registerhours.android.js');
 var _navigator;
 
 var RouteMapper = function(route, navigationOperations, onComponentRef) {
@@ -32,9 +32,9 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
       <Login 
       navigator={navigationOperations}/>
     );
-  } else if (route.name === 'register') {
+  } else if (route.name === 'registerStudent') {
     return (
-      <Register
+      <RegisterStudent
       navigator={navigationOperations}/>
     );
   }
