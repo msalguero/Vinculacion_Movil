@@ -24,7 +24,6 @@ class Menu extends Component{
   }
 
   ApproveOption(){
-    console.log(this.props)
     this.props.navigator.push({
       name: 'selectApprove'
     })

@@ -32,14 +32,15 @@ class StudentsApproveSelect extends Component {
   };
 
   setDataSource(list){
-    this.setState({
-      dataSource: ds.cloneWithRows(list)
-    });
+    if(list){
+      this.setState({
+        dataSource: ds.cloneWithRows(list)
+      });
+    }
   };
 
 
   toValidate(rowData){
-      console.log(rowData);
       this.props.navigator.push({
          name: 'formApprove',
          student: rowData

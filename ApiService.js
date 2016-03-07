@@ -1,9 +1,17 @@
 
 'use strict';
 
+var auth = {
+  	token: undefined
+  };
+
 var ApiService = function () {
 
   var url = 'http://fiasps.unitec.edu:8085/api/';
+
+  this.setToken = function(newToken) {
+  	auth.token = newToken
+  }
 
   this.login = 
   {
@@ -25,19 +33,34 @@ var ApiService = function () {
   this.students = 
   {
   	get: function(callback){
-  		fetch(url + 'students')
-	      .then((response) => response.json())
-	      .then(callback)
-	      .done();
+  		fetch(url + 'students', {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
+		.then((response) => response.json())
+		.then(callback)
+		.done();
   	},
   	getByFilter: function(id, callback){
-  		fetch(url + 'students/filter/' + id)
-	      .then((response) => response.json())
-	      .then(callback)
-	      .done();
+  		fetch(url + 'students/filter/' + id, {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
+		.then((response) => response.json())
+		.then(callback)
+		.done();
   	},
   	getById: function(id, callback){
-	  	fetch(url + 'students/' + id)
+	  	fetch(url + 'students/' + id, {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
 	    .then((response) => response.json())
 	    .then(callback)
 	    .done();
@@ -48,6 +71,7 @@ var ApiService = function () {
 		  headers: {
 		    'Accept': 'application/json',
 		    'Content-Type': 'application/json',
+		    'Authorization': auth.token
 		  },
 		  body: JSON.stringify(object)
 		})
@@ -61,6 +85,7 @@ var ApiService = function () {
 		  headers: {
 		    'Accept': 'application/json',
 		    'Content-Type': 'application/json',
+		    'Authorization': auth.token
 		  },
 		  body: JSON.stringify(object)
 		})
@@ -75,7 +100,8 @@ var ApiService = function () {
 	  			method: 'PUT',
 	  			headers:{
 	  				'Accept':'application/json',
-	  				'Content-Type':'application/json'
+	  				'Content-Type':'application/json',
+	  				'Authorization': auth.token
 	  			}
 	  		}
   		)
@@ -90,7 +116,8 @@ var ApiService = function () {
 	  			method: 'PUT',
 	  			headers:{
 	  				'Accept':'application/json',
-	  				'Content-Type':'application/json'
+	  				'Content-Type':'application/json',
+	  				'Authorization': auth.token
 	  			},
 	  			body:JSON.stringify(object)
 	  		}
@@ -114,45 +141,29 @@ var ApiService = function () {
 	    .then((response) => response.json())
 	    .then(callback)
 	    .done();
-  	},
-  	create: function(object, callback){
-  		fetch(url + 'majors', {
-		  method: 'POST',
-		  headers: {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify(object)
-		})
-		.then((response) => response.json())
-	    .then(callback)
-	    .done();
-  	},
-  	update: function(object, callback){
-  		fetch(url + 'majors/' + object.id, {
-		  method: 'PUT',
-		  headers: {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify(object)
-		})
-		.then((response) => response.json())
-	    .then(callback)
-	    .done();
   	}
   }
 
    this.hours = 
    {
   	get: function(callback){
-  		fetch(url + 'hours')
+  		fetch(url + 'hours', {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
 		.then((response) => response.json())
 		.then(callback)
 		.done();
   	},
   	getById: function(id, callback){
-		fetch(url + 'hours/' + id)
+		fetch(url + 'hours/' + id, {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
 		.then((response) => response.json())
 		.then(callback)
 		.done();
@@ -163,6 +174,7 @@ var ApiService = function () {
 		  headers: {
 		    'Accept': 'application/json',
 		    'Content-Type': 'application/json',
+	  		'Authorization': auth.auth.token
 		  },
 		  body: JSON.stringify(object)
 		})
@@ -176,6 +188,7 @@ var ApiService = function () {
 		  headers: {
 		    'Accept': 'application/json',
 		    'Content-Type': 'application/json',
+	  		'Authorization': auth.token
 		  },
 		  body: JSON.stringify(object)
 		})
@@ -188,7 +201,12 @@ var ApiService = function () {
    this.projects = 
    {
   	get: function(callback){
-  		fetch(url + 'projects')
+  		fetch(url + 'projects', {
+  			method: 'GET',
+			headers: {
+				'Authorization': auth.token
+			}
+	  	})
 		.then((response) => response.json())
 		.then(callback)
 		.done();

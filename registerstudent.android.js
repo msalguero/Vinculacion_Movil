@@ -27,7 +27,6 @@ class RegisterStudent extends Component{
   }
 
   setMajors(majors){
-    console.log(majors)
     this.setState({major: "",  items: majors,  idNumber: "", firstName: "", lastName: "", email:"", password: ""});
   }
 
@@ -58,7 +57,7 @@ class RegisterStudent extends Component{
         Campus: "SPS",
         Email: this.state.email,
         IdNumber: this.state.idNumber,
-        Major: this.state.major,
+        Major: this.state.major.MajorId,
         Name: this.state.firstName + " " + this.state.lastName,
         Password: this.state.password
       }
