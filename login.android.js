@@ -36,12 +36,9 @@ class Login extends Component{
   _onLoginButton(){
     //regex
     var login = true
+    var self = this;
     if(!Validations.check_email(this.state.email)){
       console.log("correo invalido, ejemplo@unitec.edu")
-      login = false
-    }
-    if(!Validations.check_password(this.state.password)){
-      console.log("contrasena invalida")
       login = false
     }
     if(login){
@@ -50,7 +47,12 @@ class Login extends Component{
         Password: this.state.password
       }
       api.login.login(user, function(res){
-        console.log(res);
+        if(res){
+          api.setToken(res);
+          self.props.navigator.push({
+            name: 'home'
+          })
+        }
       });
     }
   }
@@ -105,8 +107,7 @@ const styles = StyleSheet.create({
     marginLeft: 100
   },
   buttonReg: {
-    width: 100,
-    color: 'aqua',
+    width: 100
   },
   buttonText: {
     fontSize: 20,
