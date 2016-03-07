@@ -14,6 +14,7 @@ var {
   TextInput
 } = React;
 
+
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 class Home extends Component{
@@ -22,9 +23,6 @@ class Home extends Component{
 	{
 		return (
       <ScrollableTabView>
-        <ReactPage tabLabel="React" />
-        <FlowPage tabLabel="Flow" />
-        <JestPage tabLabel="Jest" />
       </ScrollableTabView>
 		);
 	}
@@ -40,12 +38,10 @@ const styles = StyleSheet.create({
   button: {
     width: 120,
     height: 50,
-    backgroundColor: 'aqua',
     marginLeft: 100
   },
   buttonReg: {
-    width: 100,
-    color: 'aqua',
+    width: 100
   },
   buttonText: {
     fontSize: 20,

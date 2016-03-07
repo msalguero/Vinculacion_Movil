@@ -19,9 +19,9 @@ var api = new ApiService();
 class RegisterStudent extends Component{
   constructor(props) {
     super(props)
-    this._onRegisterButton = this._onRegisterButton.bind(this)
-    this._onLoginButton = this._onLoginButton.bind(this)
-    this.setMajors = this.setMajors.bind(this)
+    this._onRegisterButton = this._onRegisterButton.bind(this);
+    this._onLoginButton = this._onLoginButton.bind(this);
+    this.setMajors = this.setMajors.bind(this);
     this.state = {major:  "", items: [], idNumber: "", firstName: "", lastName: "", email:"", password: ""};
     api.majors.get(this.setMajors)
   }
@@ -114,7 +114,7 @@ class RegisterStudent extends Component{
       <Text></Text>
 
       <TouchableHighlight style = {styles.buttonReg} underlayColor={'#00008b'}
-        onPress={this._onLoginButton}
+        onPress={() => this._onLoginButton()}
       >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableHighlight>
