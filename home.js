@@ -16,13 +16,23 @@ var {
 
 
 var ScrollableTabView = require('react-native-scrollable-tab-view');
+var Menu = require('./menu');
+var nav;
 
 class Home extends Component{
+
+  constructor(props){
+    super(props);
+    nav = props.navigator;
+    var self = this;
+  };
 
 	render()
 	{
 		return (
       <ScrollableTabView>
+        <View tabLabel="Notificaciones" />
+        <Menu navigator={nav} tabLabel="Menu" />
       </ScrollableTabView>
 		);
 	}
