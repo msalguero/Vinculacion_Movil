@@ -18,8 +18,12 @@ var {
 
 var ApiService = require('./ApiService');
 var Login = require('./login.android');
+<<<<<<< HEAD
 var Register = require('./register.android');
 var Home = require('./home');
+=======
+var RegisterStudent = require('./registerstudent.android');
+>>>>>>> 593c3cc18e8e6225050079bbc65aff1359d23904
 var StudentApproveSelect = require('./studentapproveselect.android.js');
 var StudentApproveForm = require('./studentapproveform.android.js');
 var RegisterHours = require('./registerhours.android.js');
@@ -39,10 +43,9 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
       <Home
       navigator={navigationOperations}/>
     );
-  }
-  else if (route.name === 'register') {
+  } else if (route.name === 'registerStudent') {
     return (
-      <Register
+      <RegisterStudent
       navigator={navigationOperations}/>
     );
   }

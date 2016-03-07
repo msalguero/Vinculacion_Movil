@@ -16,7 +16,7 @@ var ApiService = require('./ApiService');
 var Validations = require('./Validations');
 var api = new ApiService();
 
-class Register extends Component{
+class RegisterStudent extends Component{
   constructor(props) {
     super(props)
     this._onRegisterButton = this._onRegisterButton.bind(this)
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = Register;
+module.exports = RegisterStudent;
