@@ -77,7 +77,7 @@ class AwesomeProject extends Component {
       return (
         <Navigator
           style={styles.navigatorContainer}
-          initialRoute={{name:'registerHours'}}
+          initialRoute={{name:'home'}}
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={RouteMapper}/>
       );
