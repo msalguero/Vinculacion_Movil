@@ -15,6 +15,7 @@ var {
 } = React;
 
 var ApiService = require('./ApiService');
+var Validations = require('./Validations');
 var api = new ApiService();
 
 class Login extends Component{
@@ -34,7 +35,16 @@ class Login extends Component{
 
   _onLoginButton(){
     //regex
-    if(validateEmail(this.state.email) || this.state.password!= ""){
+    var login = true
+    if(!Validations.check_email(this.state.email)){
+      console.log("correo invalido, ejemplo@unitec.edu")
+      login = false
+    }
+    if(!Validations.check_password(this.state.password)){
+      console.log("contrasena invalida")
+      login = false
+    }
+    if(login){
       var user = {
         User: this.state.email,
         Password: this.state.password
@@ -43,10 +53,6 @@ class Login extends Component{
         console.log(res);
       });
     }
-    else{
-      //message error
-    }
-
   }
 	render()
 	{

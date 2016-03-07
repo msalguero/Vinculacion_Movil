@@ -29,7 +29,7 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
 
   if (route.name === 'login') {
     return (
-      <Login 
+      <Login
       navigator={navigationOperations}/>
     );
   } else if (route.name === 'registerStudent') {
@@ -46,14 +46,14 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
   }
   else if(route.name === 'formApprove'){
     return(
-        <StudentApproveForm 
+        <StudentApproveForm
         navigator={navigationOperations}
         student={route.student}/>
       );
-  } 
+  }
   else if(route.name === 'registerHours'){
     return(
-        <RegisterHours 
+        <RegisterHours
         navigator={navigationOperations}/>
       );
   }
@@ -71,10 +71,10 @@ class AwesomeProject extends Component {
         <Navigator
           style={styles.navigatorContainer}
 
-          initialRoute={{name:'registerHours'}}
+          initialRoute={{name:'login'}}
           configureScene={() => Navigator.SceneConfigs.FadeAndroid}
           renderScene={RouteMapper}/>
-      );  
+      );
   }
 }
 
