@@ -83,7 +83,7 @@ class StudentApproveForm extends Component {
         <View style={styles.renderRowGeneral}>
             <TouchableHighlight 
             style={styles.viewFooterAcceptButton} 
-            onPress={() => api.students.approve(
+            onPress={() => api.hours.create(
                     this.state.student.AccountId,function(res){
                         console.log("HI")
                     }

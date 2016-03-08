@@ -8,7 +8,8 @@ import React, {
   ListView,
   TouchableHighlight,
   ScrollView,
-  Picker
+  Picker,
+  TextInput
 } from 'react-native';
 
 var ApiService = require('./ApiService');
@@ -112,6 +113,20 @@ class RegisterHours extends Component
           </View>
           <View style={styles.renderRowGeneral}>
             <TextInput onChangeText={(hoursToRegister) => this.setState({hoursToRegister:hoursToRegister})} value={this.state.hoursToRegister}/>
+            <TouchableHighlight 
+            style={styles.viewFooterAcceptButton} 
+            onPress={() => api.students.approve(
+              {
+                "AccountId": this.state.selectedStudent,
+                "SectionId": this.state.selectedSection,
+                "ProjectId": this.state.selectedProject,
+                "Hour": this.state.hoursToRegister
+              },
+              function(res){
+                  console.log("HI");
+              }
+              )}/>
+
           </View>
         </View>
         );

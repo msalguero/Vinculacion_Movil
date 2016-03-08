@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     flex:1
   },
   container:{
-    flex:.4
+    flex:1
   },
   titleText: {
     fontSize: 30,
@@ -117,20 +117,20 @@ const styles = StyleSheet.create({
   renderRowGeneral:{
     flexDirection:'row',
     flex:1,
-    margin:.1
+    margin:1
   },
   button: {
     flex:.2,
-    margin:.1,
-    height: 50,
+    margin:1,
+    height: 20,
     backgroundColor: 'blue',
     justifyContent:'center',
     borderRadius:20
   },
   buttonReg: {
     flex:.3,
-    margin:.1,
-    height:50,
+    margin:1,
+    height:20,
     backgroundColor:'red',
     justifyContent:'center',
     borderRadius:20
@@ -144,13 +144,13 @@ const styles = StyleSheet.create({
   textLabel:{
     flex:.3,
     height:40,
-    margin:.05,
+    margin:1,
     fontSize:20,
     textAlign:'left',
     justifyContent:'center'
   },
   textInput:{
-    margin:.05,
+    margin:1,
     height:40,
     flex:.7
   }
